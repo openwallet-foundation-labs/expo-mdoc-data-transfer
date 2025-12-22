@@ -27,7 +27,7 @@
     "@expo/config-types": "^54.0.8",
     "@types/node": "^24.10.0",
     "@types/react": "~18.2.79",
-    "expo-module-scripts": "3.5.2",
+    "expo-module-scripts": "5.0.8",
     "expo-modules-core": "~1.12.26",
     "react-native": "0.75.3",
     "release-it": "^17.4.1",
