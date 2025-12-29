@@ -37,8 +37,8 @@ importers:
         specifier: 3.5.2
         version: 3.5.2(@babel/core@7.26.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.0))(eslint@8.57.1)(jest@29.7.0(@types/node@24.10.4))(prettier@2.8.8)(react-test-renderer@18.2.0(react@19.0.0))(react@19.0.0)
       expo-modules-core:
-        specifier: ~1.12.26
-        version: 1.12.26
+        specifier: ~3.0.29
+        version: 3.0.29(react-native@0.75.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.2.79)(react@19.0.0)(typescript@5.9.3))(react@19.0.0)
       react-native:
         specifier: 0.75.3
         version: 0.75.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.2.79)(react@19.0.0)(typescript@5.9.3)
@@ -2806,11 +2806,14 @@ packages:
     resolution: {integrity: sha512-rkGc6a/90AC3q8wSy4V+iIpq6Fd0KXmQICKrvfmSWwrMgJmLfwP4QTrvLYPYOOMjFwNJcTaohcH8vzW/wYKrMg==}
     hasBin: true
 
-  expo-modules-core@1.12.26:
-    resolution: {integrity: sha512-y8yDWjOi+rQRdO+HY+LnUlz8qzHerUaw/LUjKPU/mX8PRXP4UUPEEp5fjAwBU44xjNmYSHWZDwet4IBBE+yQUA==}
-
   expo-modules-core@2.1.4:
     resolution: {integrity: sha512-gfsbTPSaocgcQQDy4Z4ztg1hcOofwODctAA+yoNcrUQr/hRaDc6ndIJQwGPjoGXnEbXVxFfzGGSAkNiqK1I7lQ==}
+
+  expo-modules-core@3.0.29:
+    resolution: {integrity: sha512-LzipcjGqk8gvkrOUf7O2mejNWugPkf3lmd9GkqL9WuNyeN2fRwU0Dn77e3ZUKI3k6sI+DNwjkq4Nu9fNN9WS7Q==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
 
   expo@52.0.27:
     resolution: {integrity: sha512-PxIS8JRTegUNYq4vNeP0eCqm7p17oGNYjJ/9x207zkwVlklywD9LYIckGojXEY5JPW/DwhbhtO6E2hMgdQQugg==}
@@ -5587,6 +5590,7 @@ packages:
   whatwg-encoding@2.0.0:
     resolution: {integrity: sha512-p41ogyeMUrw3jWclHWTQg1k05DSVXPLcVxRTYsXUk+ZooOCZLcoYgPZ/HL/D/N+uQPOtcp1me1WhBEaX02mhWg==}
     engines: {node: '>=12'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-fetch@3.6.20:
     resolution: {integrity: sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg==}
@@ -9801,13 +9805,15 @@ snapshots:
       require-from-string: 2.0.2
       resolve-from: 5.0.0
 
-  expo-modules-core@1.12.26:
-    dependencies:
-      invariant: 2.2.4
-
   expo-modules-core@2.1.4:
     dependencies:
       invariant: 2.2.4
+
+  expo-modules-core@3.0.29(react-native@0.75.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.2.79)(react@19.0.0)(typescript@5.9.3))(react@19.0.0):
+    dependencies:
+      invariant: 2.2.4
+      react: 19.0.0
+      react-native: 0.75.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.2.79)(react@19.0.0)(typescript@5.9.3)
 
   expo@52.0.27(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(react-native@0.75.3(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.2.79)(react@19.0.0)(typescript@5.9.3))(react@19.0.0):
     dependencies:
