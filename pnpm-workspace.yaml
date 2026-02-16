@@ -1,0 +1,5 @@
+packages:
+  - example
+  - expo-sdk
+
+nodeLinker: hoisted

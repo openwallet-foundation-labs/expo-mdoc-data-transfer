@@ -1,0 +1,9 @@
+[versions]
+kotlin = "2.2.21"
+agp = "8.13.1"
+android-compileSdk = "36"
+android-minSdk = "23"
+
+[plugins]
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
