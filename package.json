@@ -14,7 +14,12 @@
     "types:check": "EXPO_NONINTERACTIVE=1 expo-module typecheck && EXPO_NONINTERACTIVE=1 expo-module plugin typecheck",
     "release": "release-it"
   },
-  "keywords": ["react-native", "expo", "@animo-id/expo-mdoc-data-transfer", "MdocDataTransfer"],
+  "keywords": [
+    "react-native",
+    "expo",
+    "@animo-id/expo-mdoc-data-transfer",
+    "MdocDataTransfer"
+  ],
   "repository": "https://github.com/animo/expo-mdoc-data-transfer",
   "bugs": {
     "url": "https://github.com/animo/expo-mdoc-data-transfer/issues"
@@ -23,7 +28,7 @@
   "license": "Apache-2.0",
   "homepage": "https://github.com/animo/expo-mdoc-data-transfer#readme",
   "devDependencies": {
-    "@biomejs/biome": "1.9.3",
+    "@biomejs/biome": "2.4.0",
     "@expo/config-types": "^54.0.8",
     "@types/node": "^24.10.0",
     "@types/react": "~18.2.79",
