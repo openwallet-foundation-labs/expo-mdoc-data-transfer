@@ -43,5 +43,5 @@ android {
 }
 
 dependencies {
-  implementation files('../../kmp-sdk/build/outputs/aar/mdoc-proximity.aar')
+  implementation files('MdocProximity.aar')
 }

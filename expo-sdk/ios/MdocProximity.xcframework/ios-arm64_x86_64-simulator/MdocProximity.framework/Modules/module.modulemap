@@ -1,0 +1,5 @@
+framework module "MdocProximity" {
+    umbrella header "MdocProximity.h"
+    export *
+    module * { export * }
+}

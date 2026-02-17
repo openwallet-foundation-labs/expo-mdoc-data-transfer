@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "mdoc-proximity"
+rootProject.name = "MdocProximity"

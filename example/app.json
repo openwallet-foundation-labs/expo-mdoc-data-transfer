@@ -36,7 +36,12 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      ["expo-build-properties", {
+        "ios": {
+          "useFrameworks": "static"
+        } 
+      }]
     ],
     "experiments": {
       "typedRoutes": true,
