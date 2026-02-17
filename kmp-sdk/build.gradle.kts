@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
-
 plugins {
   alias(libs.plugins.kotlin.multiplatform)
   alias(libs.plugins.android.kotlin.multiplatform.library)
@@ -15,9 +13,7 @@ kotlin {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
 
-    val iosTargets = listOf(iosX64(), iosArm64(), iosSimulatorArm64())
-
-    iosTargets.forEach {
+    listOf(iosX64(), iosArm64(), iosSimulatorArm64()).forEach {
         it.binaries.framework {
             baseName = "MdocProximity"
             isStatic = true
@@ -26,13 +22,6 @@ kotlin {
 
     cocoapods {
         version = "1.0"
-        summary = "Some description for a Kotlin/Native module"
-        homepage = "Link to a Kotlin/Native module homepage"
-
-        // Optional properties
-        // Configure the Pod name here instead of changing the Gradle project name
-        name = "MdocProximity"
-
         framework {
             baseName = "MdocProximity"
             isStatic = true
