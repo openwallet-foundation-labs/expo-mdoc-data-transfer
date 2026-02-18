@@ -5,6 +5,12 @@ plugins {
 }
 
 kotlin {
+    sourceSets {
+      commonMain.dependencies {
+        implementation("org.multipaz:multipaz:0.96.0")
+      }
+    }
+
     jvmToolchain(17)
 
     android {

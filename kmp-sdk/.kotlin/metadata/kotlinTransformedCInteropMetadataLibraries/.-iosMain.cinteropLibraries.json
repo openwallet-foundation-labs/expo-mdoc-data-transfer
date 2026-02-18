@@ -1,0 +1,22 @@
+[
+  {
+    "moduleId": "org.multipaz:multipaz:0.96.0",
+    "file": "/Users/beri/Developer/work/animo/expo-mdoc-data-transfer/kmp-sdk/.kotlin/metadata/kotlinTransformedCInteropMetadataLibraries/org.multipaz-multipaz-0.96.0-iosMain-cinterop/MultipazProject_multipaz-cinterop-SwiftBridge-lGzNvg.klib",
+    "sourceSetName": "iosMain"
+  },
+  {
+    "moduleId": "androidx.sqlite:sqlite-framework:2.5.2",
+    "file": "/Users/beri/Developer/work/animo/expo-mdoc-data-transfer/kmp-sdk/.kotlin/metadata/kotlinTransformedCInteropMetadataLibraries/androidx.sqlite-sqlite-framework-2.5.2-nativeMain-cinterop/androidx.sqlite_sqlite-framework-cinterop-sqlite3-K4nN4w.klib",
+    "sourceSetName": "nativeMain"
+  },
+  {
+    "moduleId": "org.jetbrains.kotlinx:atomicfu:0.23.1",
+    "file": "/Users/beri/Developer/work/animo/expo-mdoc-data-transfer/kmp-sdk/.kotlin/metadata/kotlinTransformedCInteropMetadataLibraries/org.jetbrains.kotlinx-atomicfu-0.23.1-nativeMain-cinterop/org.jetbrains.kotlinx_atomicfu-cinterop-interop-wFq7cg.klib",
+    "sourceSetName": "nativeMain"
+  },
+  {
+    "moduleId": "io.ktor:ktor-utils:2.3.13",
+    "file": "/Users/beri/Developer/work/animo/expo-mdoc-data-transfer/kmp-sdk/.kotlin/metadata/kotlinTransformedCInteropMetadataLibraries/io.ktor-ktor-utils-2.3.13-iosMain-cinterop/io.ktor_ktor-utils-cinterop-threadUtils-mEJcNA.klib",
+    "sourceSetName": "iosMain"
+  }
+]

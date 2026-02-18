@@ -56,3 +56,4 @@ example/android
 example/.expo
 
 *.tgz
+*.klib
