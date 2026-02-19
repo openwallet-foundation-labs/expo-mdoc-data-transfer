@@ -6,16 +6,13 @@
     "orientation": "portrait",
     "scheme": "mdoc-data-transfer-example",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": false,
     "plugins": [
       ["../app.plugin.js", { "ios": { "buildStatic": ["RNReanimated"] } }],
       [
         "expo-build-properties",
         {
           "android": {
-            "minSdkVersion": 26,
-            "useLegacyPackaging": true,
-            "extraMavenRepos": ["https://s01.oss.sonatype.org/content/repositories/snapshots/"]
+            "minSdkVersion": 26
           },
           "ios": {
             "useFrameworks": "dynamic",
@@ -28,10 +25,10 @@
       "typedRoutes": true
     },
     "android": {
-      "package": "id.animo.mdocdatatransfer.example"
+      "package": "id.animo.mdoc.datatransfer.example"
     },
     "ios": {
-      "bundleIdentifier": "id.animo.mdocdatatransfer.example"
+      "bundleIdentifier": "id.animo.mdoc.datatransfer.example"
     },
     "splash": {
       "backgroundColor": "#ffffff"

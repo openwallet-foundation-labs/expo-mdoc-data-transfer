@@ -132,13 +132,13 @@ const withAndroidNfcProperties: ConfigPlugin = (expoConfig) =>
     }
 
     for (const app of androidManifest.application ?? []) {
-      if (app.service?.some((s) => s.$['android:name'] === 'id.animo.mdocdatatransfer.NfcEngagementServiceImpl'))
+      if (app.service?.some((s) => s.$['android:name'] === 'id.animo.mdoc.datatransfer.NfcEngagementServiceImpl'))
         continue
       app.service ??= []
       app.service.push({
         $: {
           'android:exported': 'true',
-          'android:name': 'id.animo.mdocdatatransfer.NfcEngagementServiceImpl',
+          'android:name': 'id.animo.mdoc.datatransfer.NfcEngagementServiceImpl',
           'android:permission': 'android.permission.BIND_NFC_SERVICE',
         },
         'intent-filter': [
@@ -170,10 +170,30 @@ const withAndroidNfcProperties: ConfigPlugin = (expoConfig) =>
     return c
   })
 
+const withAndroidFixMetaInfConflict: ConfigPlugin = (expoConfig) =>
+  withAppBuildGradle(expoConfig, (c) => {
+    if (c.modResults.contents.includes('META-INF/versions/9/OSGI-INF/MANIFEST.MF')) {
+      return c
+    }
+
+    c.modResults.contents = c.modResults.contents.replace(
+      /android\s?{/,
+      `android {
+        packagingOptions {
+          resources {
+            excludes += "META-INF/versions/9/OSGI-INF/MANIFEST.MF"
+          }
+        }`
+    )
+
+    return c
+  })
+
 export const withAndroid: ConfigPlugin = (config) =>
   withPlugins(config, [
     (c) => AndroidConfig.Permissions.withPermissions(c, ['android.permission.BLUETOOTH_CONNECT']),
     withBleAndroidManifest,
     withAndroidExcludeBcProv,
     withAndroidNfcProperties,
+    withAndroidFixMetaInfConflict,
   ])

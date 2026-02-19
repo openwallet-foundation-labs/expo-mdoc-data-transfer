@@ -1,11 +1,9 @@
-package id.animo.mdocdatatransfer
+package id.animo.mdoc.datatransfer
 
 import expo.modules.kotlin.Promise
 import expo.modules.kotlin.exception.Exceptions
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
-import org.bouncycastle.jce.provider.BouncyCastleProvider
-import java.security.Security
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
@@ -22,10 +20,6 @@ class MdocDataTransferModule : Module() {
         )
 
         Function("initialize") {
-            // We have to re-set the Bouncy Castle provider, otherwise the EUDI library cannot find it correctly
-            Security.removeProvider("BC")
-            Security.addProvider(BouncyCastleProvider())
-
             mDocDataTransfer = MdocDataTransfer(
                 appContext.reactContext ?: throw Exceptions.ReactContextLost(),
                 appContext.currentActivity ?: throw Exceptions.MissingActivity()

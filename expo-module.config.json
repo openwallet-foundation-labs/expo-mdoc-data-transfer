@@ -2,6 +2,6 @@
   "platforms": ["android"],
   "apple": false,
   "android": {
-    "modules": ["id.animo.mdocdatatransfer.MdocDataTransferModule"]
+    "modules": ["id.animo.mdoc.datatransfer.MdocDataTransferModule"]
   }
 }

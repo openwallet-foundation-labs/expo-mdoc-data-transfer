@@ -1,4 +1,4 @@
-package id.animo.mdocdatatransfer
+package id.animo.mdoc.datatransfer
 
 object MdocDataTransferEvent {
     const val ON_REQUEST_RECEIVED = "onRequestReceived"

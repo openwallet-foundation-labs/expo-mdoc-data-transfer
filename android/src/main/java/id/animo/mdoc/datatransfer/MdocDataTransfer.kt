@@ -1,4 +1,4 @@
-package id.animo.mdocdatatransfer
+package id.animo.mdoc.datatransfer
 
 import android.app.Activity
 import android.content.Context
@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import eu.europa.ec.eudi.iso18013.transfer.TransferEvent
 import eu.europa.ec.eudi.iso18013.transfer.engagement.NfcEngagementService
-import eu.europa.ec.eudi.iso18013.transfer.response.DeviceRequest
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
@@ -27,7 +26,7 @@ class MdocDataTransfer(
             when (event) {
                 is TransferEvent.QrEngagementReady -> {
                     Log.d(TAG, ":::mdoc-data-transfer::: TransferEvent.QrEngagementReady")
-                    onQrEngagementReady?.let { it(event.qrCode.content) }
+                    onQrEngagementReady?.let { it(event.qrCode) }
                 }
 
                 is TransferEvent.Connecting -> {
@@ -52,17 +51,13 @@ class MdocDataTransfer(
 
                 is TransferEvent.RequestReceived -> {
                     Log.d(TAG, ":::mdoc-data-transfer::: TransferEvent.RequestReceived")
-                    when (val request = event.request) {
-                        is DeviceRequest -> {
-                            sendEvent(
-                                MdocDataTransferEvent.ON_REQUEST_RECEIVED,
-                                mapOf(
-                                    ("deviceRequest" to Base64.Default.encode(request.deviceRequestBytes)),
-                                    ("sessionTranscript" to Base64.Default.encode(request.sessionTranscriptBytes))
-                                )
-                            )
-                        }
-                    }
+                    sendEvent(
+                        MdocDataTransferEvent.ON_REQUEST_RECEIVED,
+                        mapOf(
+                            ("deviceRequest" to Base64.Default.encode(event.deviceRequestBytes)),
+                            ("sessionTranscript" to Base64.Default.encode(event.sessionTranscriptBytes))
+                        )
+                    )
                 }
 
                 is TransferEvent.ResponseSent -> {
@@ -72,6 +67,8 @@ class MdocDataTransfer(
                         null
                     )
                 }
+
+                is TransferEvent.IntentToSend -> TODO()
             }
         }
 
@@ -98,6 +95,9 @@ class MdocDataTransfer(
 
     fun shutdown() {
         disableNfc()
-        MdocDataTransferManager.transferManager.value.stopPresentation(true, true)
+        MdocDataTransferManager.transferManager.value.stopPresentation(
+            sendSessionTerminationMessage = true,
+            useTransportSpecificSessionTermination = true
+        )
     }
 }
