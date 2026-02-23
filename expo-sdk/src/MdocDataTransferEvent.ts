@@ -4,11 +4,11 @@ export enum MdocDataTransferEvent {
   OnError = 'onError',
 }
 
-export type OnResponseSendPayload = null
+export type OnResponseSentPayload = null
 
-export type OnRequestReceivedEventPayload<T = string> = {
-  deviceRequest: T
-  sessionTranscript: T
+export type OnRequestReceivedEventPayload = {
+  deviceRequest: string
+  sessionTranscript: string
 }
 
 export type OnErrorPayload = {

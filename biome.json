@@ -1,35 +1,38 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
-  "formatter": {
-    "lineWidth": 120,
-    "indentStyle": "space"
-  },
-  "javascript": {
-    "parser": {
-      "unsafeParameterDecoratorsEnabled": true
-    },
-    "formatter": {
-      "semicolons": "asNeeded",
-      "quoteStyle": "single",
-      "trailingCommas": "es5",
-      "lineWidth": 120,
-      "indentStyle": "space"
-    }
-  },
-  "json": {
-    "parser": {
-      "allowComments": true
-    }
-  },
-  "organizeImports": {
-    "enabled": true
-  },
-  "linter": {
-    "enabled": true
-  },
-  "vcs": {
-    "useIgnoreFile": true,
-    "clientKind": "git",
-    "enabled": true
-  }
+	"$schema": "https://biomejs.dev/schemas/2.3.15/schema.json",
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
+	"javascript": {
+		"parser": {
+			"unsafeParameterDecoratorsEnabled": true
+		},
+		"formatter": {
+			"semicolons": "asNeeded",
+			"quoteStyle": "single",
+			"trailingCommas": "es5",
+			"lineWidth": 120,
+			"indentStyle": "space"
+		}
+	},
+	"json": {
+		"parser": {
+			"allowComments": true
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"performance": {
+				"noAccumulatingSpread": "off"
+			},
+			"correctness": {
+				"noUnusedImports": "error"
+			}
+		}
+	},
+	"vcs": {
+		"useIgnoreFile": true,
+		"clientKind": "git",
+		"enabled": true
+	}
 }

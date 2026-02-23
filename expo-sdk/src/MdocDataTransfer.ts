@@ -4,9 +4,9 @@ import {
   MdocDataTransferEvent,
   type OnErrorPayload,
   type OnRequestReceivedEventPayload,
-  type OnResponseSendPayload,
+  type OnResponseSentPayload,
 } from './MdocDataTransferEvent'
-import { mDocNativeModule, mDocNativeModuleEventEmitter } from './MdocDataTransferModule'
+import { NativeMdocDataTransfer } from './NativeMdocDataTransfer'
 
 export let instance: MdocDataTransfer | undefined = undefined
 export const mdocDataTransfer = {
@@ -22,7 +22,7 @@ class MdocDataTransfer {
 
   private static handleError(nativeCall: () => void) {
     let error: string | undefined
-    const subscription = mDocNativeModuleEventEmitter.addListener(
+    const subscription = NativeMdocDataTransfer.addListener(
       MdocDataTransferEvent.OnError,
       (payload: OnErrorPayload) => {
         error = payload.error
@@ -39,19 +39,19 @@ class MdocDataTransfer {
   }
 
   public static initialize() {
-    MdocDataTransfer.handleError(mDocNativeModule.initialize)
+    MdocDataTransfer.handleError(NativeMdocDataTransfer.initialize)
 
     instance = new MdocDataTransfer()
     return instance
   }
 
   public async startQrEngagement() {
-    return await mDocNativeModule.startQrEngagement()
+    return await NativeMdocDataTransfer.startQrEngagement()
   }
 
   public async waitForDeviceRequest() {
-    return await new Promise<OnRequestReceivedEventPayload<Uint8Array>>((resolve) =>
-      mDocNativeModuleEventEmitter.addListener(
+    return await new Promise<{ deviceRequest: Uint8Array; sessionTranscript: Uint8Array }>((resolve) =>
+      NativeMdocDataTransfer.addListener(
         MdocDataTransferEvent.OnRequestReceived,
         (payload: OnRequestReceivedEventPayload) => {
           resolve({
@@ -64,12 +64,12 @@ class MdocDataTransfer {
   }
 
   public async sendDeviceResponse(deviceResponse: Uint8Array) {
-    const p = new Promise<OnResponseSendPayload>((resolve) =>
-      mDocNativeModuleEventEmitter.addListener(MdocDataTransferEvent.OnResponseSent, resolve)
+    const p = new Promise<OnResponseSentPayload>((resolve) =>
+      NativeMdocDataTransfer.addListener(MdocDataTransferEvent.OnResponseSent, resolve)
     )
 
     MdocDataTransfer.handleError(() =>
-      mDocNativeModule.sendDeviceResponse(Buffer.from(deviceResponse).toString('base64'))
+      NativeMdocDataTransfer.sendDeviceResponse(Buffer.from(deviceResponse).toString('base64'))
     )
 
     await p
@@ -77,14 +77,13 @@ class MdocDataTransfer {
 
   public shutdown() {
     this.isNfcEnabled = false
-    MdocDataTransfer.handleError(mDocNativeModule.shutdown)
-
+    MdocDataTransfer.handleError(NativeMdocDataTransfer.shutdown)
     instance = undefined
   }
 
   public enableNfc() {
     if (this.isNfcEnabled) return
-    mDocNativeModule.enableNfc()
+    NativeMdocDataTransfer.enableNfc()
     this.isNfcEnabled = true
   }
 }

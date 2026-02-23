@@ -157,7 +157,7 @@ const withAndroidNfcProperties: ConfigPlugin = (expoConfig) =>
             ],
           },
         ],
-        // @ts-ignore
+        // @ts-expect-error
         'meta-data': {
           $: {
             'android:name': 'android.nfc.cardemulation.host_apdu_service',
