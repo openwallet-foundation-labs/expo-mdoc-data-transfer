@@ -9,8 +9,6 @@
 	},
 	"scripts": {
 		"build": "EXPO_NONINTERACTIVE=1 expo-module build && EXPO_NONINTERACTIVE=1 expo-module build plugin",
-		"style:check": "biome check --unsafe",
-		"style:fix": "pnpm style:check --write",
 		"types:check": "EXPO_NONINTERACTIVE=1 expo-module typecheck && EXPO_NONINTERACTIVE=1 expo-module plugin typecheck",
 		"release": "release-it"
 	},

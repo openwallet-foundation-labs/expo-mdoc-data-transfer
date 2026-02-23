@@ -43,10 +43,10 @@ jobs:
         run: pnpm style:check
 
       - name: Build
-        run: pnpm build
+        run: pnpm --filter "@animo-id/expo-mdoc-data-transfer" build
 
       - name: Check types
-        run: pnpm types:check
+        run: pnpm --filter "@animo-id/expo-mdoc-data-transfer" types:check
 
   continuous-deployment:
     if: github.event_name == 'workflow_dispatch'
@@ -72,7 +72,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build
+        run: pnpm --filter "@animo-id/expo-mdoc-data-transfer" build
 
       - name: Set git configuration 
         run: |
@@ -82,13 +82,13 @@ jobs:
       - name: Publish
         id: publish
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_ANIMO_ID_TOKEN_UNTIL_3_16_26 }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
 
           if [ ${{ inputs.release-type }} == 'alpha' ]; then
-            pnpm release --preRelease=alpha
+            pnpm --filter "@animo-id/expo-mdoc-data-transfer" release --preRelease=alpha
           else
-            pnpm release -i=${{ inputs.release-type }}
+            pnpm --filter "@animo-id/expo-mdoc-data-transfer" release -i=${{ inputs.release-type }}
           fi

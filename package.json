@@ -2,8 +2,7 @@
 	"name": "@animo-id/expo-mdoc-datatransfer",
 	"scripts": {
 		"style:check": "biome check --unsafe",
-		"style:fix": "pnpm style:check --write",
-		"types:check": "EXPO_NONINTERACTIVE=1 expo-module typecheck && EXPO_NONINTERACTIVE=1 expo-module plugin typecheck"
+		"style:fix": "pnpm style:check --write"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.3.15"
