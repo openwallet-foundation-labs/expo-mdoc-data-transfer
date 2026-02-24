@@ -30,6 +30,7 @@
 		"@types/node": "^24.10.0",
 		"@types/react": "~19.1.10",
 		"expo": "catalog:",
+		"expo-module-scripts": "catalog:",
 		"react": "catalog:",
 		"react-native": "catalog:",
 		"release-it": "^17.4.1",

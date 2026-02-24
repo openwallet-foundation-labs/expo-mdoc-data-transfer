@@ -49,10 +49,9 @@ yarn-debug.log
 yarn-error.log
 
 # Expo
-.expo/*
+*/.expo
 
 example/ios
 example/android
-example/.expo
 
 *.tgz
