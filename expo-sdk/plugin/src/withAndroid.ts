@@ -4,7 +4,7 @@ import {
   withAndroidManifest,
   withAppBuildGradle,
   withPlugins,
-} from '@expo/config-plugins'
+} from 'expo/config-plugins'
 
 type InnerManifest = AndroidConfig.Manifest.AndroidManifest['manifest']
 
@@ -119,6 +119,28 @@ const withAndroidExcludeBcProv: ConfigPlugin = (expoConfig) =>
     return c
   })
 
+const withAndroidBouncyCastleResolution: ConfigPlugin = (expoConfig) =>
+  withAppBuildGradle(expoConfig, (c) => {
+    if (c.modResults.contents.includes('bcutil-jdk18on:1.81')) {
+      return c
+    }
+
+    c.modResults.contents += `
+
+configurations.all {
+    resolutionStrategy {
+        force "org.bouncycastle:bcutil-jdk18on:1.81"
+        force "org.bouncycastle:bcprov-jdk18on:1.81"
+    }
+
+    exclude group: "org.bouncycastle", module: "bcutil-jdk15to18"
+    exclude group: "org.bouncycastle", module: "bcprov-jdk15to18"
+}
+`
+
+    return c
+  })
+
 const withAndroidNfcProperties: ConfigPlugin = (expoConfig) =>
   withAndroidManifest(expoConfig, (c) => {
     const androidManifest = c.modResults.manifest
@@ -193,6 +215,7 @@ export const withAndroid: ConfigPlugin = (config) =>
   withPlugins(config, [
     (c) => AndroidConfig.Permissions.withPermissions(c, ['android.permission.BLUETOOTH_CONNECT']),
     withBleAndroidManifest,
+    withAndroidBouncyCastleResolution,
     withAndroidExcludeBcProv,
     withAndroidNfcProperties,
     withAndroidFixMetaInfConflict,

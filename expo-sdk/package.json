@@ -1,6 +1,6 @@
 {
 	"name": "@animo-id/expo-mdoc-data-transfer",
-	"version": "0.0.0",
+	"version": "0.2.0-alpha.1",
 	"description": "Expo mdoc data transfer module",
 	"main": "build/index.js",
 	"types": "build/index.d.ts",
@@ -28,12 +28,12 @@
 	"devDependencies": {
 		"@expo/config-types": "^54.0.8",
 		"@types/node": "^24.10.0",
-		"@types/react": "~18.2.79",
-		"expo-module-scripts": "3.5.2",
-		"expo-modules-core": "~1.12.26",
-		"react-native": "0.75.3",
+		"@types/react": "~19.1.10",
+		"expo": "catalog:",
+		"react": "catalog:",
+		"react-native": "catalog:",
 		"release-it": "^17.4.1",
-		"typescript": "~5.9.3"
+		"typescript": "catalog:"
 	},
 	"peerDependencies": {
 		"expo": ">= 51",
@@ -41,7 +41,6 @@
 		"react-native": ">= 0.75"
 	},
 	"dependencies": {
-		"@expo/config-plugins": "^8.0.10",
 		"buffer": "^6.0.3"
 	}
 }

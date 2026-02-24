@@ -1,4 +1,4 @@
-import { type ConfigPlugin, createRunOncePlugin, withPlugins } from '@expo/config-plugins'
+import { type ConfigPlugin, createRunOncePlugin, withPlugins } from 'expo/config-plugins'
 
 import { withAndroid } from './withAndroid'
 import { withIos } from './withIos'

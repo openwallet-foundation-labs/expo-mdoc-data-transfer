@@ -1,4 +1,4 @@
-import { type ConfigPlugin, withInfoPlist, withPlugins, withPodfile } from '@expo/config-plugins'
+import { type ConfigPlugin, withInfoPlist, withPlugins, withPodfile } from 'expo/config-plugins'
 import type { Props } from '.'
 
 const BLUETOOTH_ALWAYS = 'Allow $(PRODUCT_NAME) to connect to bluetooth devices for data sharing'

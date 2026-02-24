@@ -13,11 +13,11 @@
 		"@animo-id/expo-mdoc-data-transfer": "workspace:",
 		"@babel/runtime": "^7.25.9",
 		"@react-native/babel-preset": "^0.76.6",
-		"expo": "~54.0.33",
+		"expo": "catalog:",
 		"expo-build-properties": "~1.0.10",
 		"expo-dev-client": "~6.0.20",
-		"react": "19.1.0",
-		"react-native": "0.81.5",
+		"react": "catalog:",
+		"react-native": "catalog:",
 		"react-native-gesture-handler": "2.28.0",
 		"react-native-qrcode-svg": "^6.3.12",
 		"react-native-reanimated": "~4.1.6",
@@ -29,7 +29,7 @@
 		"@babel/core": "7.26.0",
 		"@react-native-community/cli": "^17.0.1",
 		"@types/react": "19.1.17",
-		"typescript": "5.9.3"
+		"typescript": "catalog:"
 	},
 	"expo": {
 		"autoLinking": {

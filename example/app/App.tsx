@@ -1,7 +1,6 @@
 import { mdocDataTransfer, useMdocDataTransferShutdownOnUnmount } from '@animo-id/expo-mdoc-data-transfer'
 import { useState } from 'react'
 import { Button, type Permission, PermissionsAndroid, Platform, View } from 'react-native'
-
 import QrCode from 'react-native-qrcode-svg'
 
 const Pad = () => <View style={{ marginBottom: 10 }} />

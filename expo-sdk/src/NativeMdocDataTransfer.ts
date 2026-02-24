@@ -1,4 +1,4 @@
-import { NativeModule, requireNativeModule } from 'expo-modules-core'
+import { NativeModule, requireNativeModule } from 'expo'
 import type { OnErrorPayload, OnRequestReceivedEventPayload, OnResponseSentPayload } from './MdocDataTransferEvent'
 
 export type MdocDataTransferEvents = {
