@@ -1,30 +1,14 @@
-<p align="center">
-  <picture>
-   <source media="(prefers-color-scheme: light)" srcset="https://res.cloudinary.com/animo-solutions/image/upload/v1656578320/animo-logo-light-no-text_ok9auy.svg">
-   <source media="(prefers-color-scheme: dark)" srcset="https://res.cloudinary.com/animo-solutions/image/upload/v1656578320/animo-logo-dark-no-text_fqqdq9.svg">
-   <img alt="Animo Logo" height="200px" />
-  </picture>
-</p>
-
 <h1 align="center" ><b>Expo - mDOC Data Transfer</b></h1>
-
-<h4 align="center">Powered by &nbsp; 
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="https://res.cloudinary.com/animo-solutions/image/upload/v1656579715/animo-logo-light-text_cma2yo.svg">
-    <source media="(prefers-color-scheme: dark)" srcset="https://res.cloudinary.com/animo-solutions/image/upload/v1656579715/animo-logo-dark-text_uccvqa.svg">
-    <img alt="Animo Logo" height="12px" />
-  </picture>
-</h4><br>
 
 <p align="center">
   <a href="https://typescriptlang.org">
     <img src="https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg" />
   </a>
-  <a href="https://www.npmjs.com/package/@animo-id/expo-mdoc-data-transfer">
-    <img src="https://img.shields.io/npm/v/@animo-id/expo-mdoc-data-transfer" />
+  <a href="https://www.npmjs.com/package/expo-mdoc-data-transfer">
+    <img src="https://img.shields.io/npm/v/expo-mdoc-data-transfer" />
   </a>
   <a
-    href="https://raw.githubusercontent.com/animo/expo-mdoc-data-transfer/main/LICENSE"
+    href="https://raw.githubusercontent.com/openwallet-foundation-labs/expo-mdoc-data-transfer/main/LICENSE"
     ><img
       alt="License"
       src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"
@@ -50,7 +34,7 @@ An [Expo Module](https://docs.expo.dev/modules/overview/) with support for mDOC 
 First, install the module using your package manager.
 
 ```sh
-npm install @animo-id/mdoc-data-transfer
+npm install expo-mdoc-data-transfer
 ```
 
 Then prebuild the application so the Expo Module wrapper can be added as native dependency:
@@ -74,7 +58,7 @@ Run `USE_FRAMEWORKS=dynamic npx pod-install` after installing the npm package.
 
 ## Usage
 
-You can import `@animo-id/mdoc-data-transfer` in your application.
+You can import `expo-mdoc-data-transfer` in your application.
 
 ## Contributing
 

@@ -1,4 +1,4 @@
-package id.animo.mdoc.datatransfer
+package foundation.openwallet.mdoc.datatransfer
 
 import expo.modules.kotlin.Promise
 import expo.modules.kotlin.exception.Exceptions

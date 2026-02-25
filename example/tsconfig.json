@@ -4,7 +4,7 @@
 		"strict": true,
 		"paths": {
 			"@/*": ["./*"],
-			"@animo-id/expo-ausweis-sdk": ["../src"]
+			"expo-mdoc-data-transfer": ["../src"]
 		}
 	},
 	"include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]

@@ -1,4 +1,4 @@
-import { mdocDataTransfer, useMdocDataTransferShutdownOnUnmount } from '@animo-id/expo-mdoc-data-transfer'
+import { mdocDataTransfer, useMdocDataTransferShutdownOnUnmount } from 'expo-mdoc-data-transfer'
 import { useState } from 'react'
 import { Button, type Permission, PermissionsAndroid, Platform, View } from 'react-native'
 import QrCode from 'react-native-qrcode-svg'

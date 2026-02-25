@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-group = 'id.animo.mdoc.datatransfer'
+group = 'foundation.openwallet.mdoc.datatransfer'
 version = '0.1.0'
 
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
@@ -23,7 +23,7 @@ project.android {
 }
 
 android {
-    namespace "id.animo.mdoc.datatransfer"
+    namespace "foundation.openwallet.mdoc.datatransfer"
     defaultConfig {
         versionCode 1
         versionName "0.1.0"

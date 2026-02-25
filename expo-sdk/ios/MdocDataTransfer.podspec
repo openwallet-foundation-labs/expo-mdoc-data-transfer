@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage       = package['homepage']
   s.platforms      = { :ios => '16.0'}
   s.swift_version  = '5.4'
-  s.source         = { :git => "https://github.com/animo/mdoc-data-transfer.git", :tag => "#{s.version}" }
+  s.source         = { :git => "https://github.com/openwallet-foundation-labs/mdoc-data-transfer.git", :tag => "#{s.version}" }
   s.static_framework = true
 
   s.pod_target_xcconfig = {

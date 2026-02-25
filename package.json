@@ -1,5 +1,5 @@
 {
-	"name": "@animo-id/expo-mdoc-datatransfer",
+	"name": "monorepo",
 	"scripts": {
 		"style:check": "biome check --unsafe",
 		"style:fix": "pnpm style:check --write"

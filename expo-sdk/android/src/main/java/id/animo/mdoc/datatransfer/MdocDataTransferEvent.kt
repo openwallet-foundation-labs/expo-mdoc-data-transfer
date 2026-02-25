@@ -1,4 +1,4 @@
-package id.animo.mdoc.datatransfer
+package foundation.openwallet.mdoc.datatransfer
 
 object MdocDataTransferEvent {
     const val ON_REQUEST_RECEIVED = "onRequestReceived"

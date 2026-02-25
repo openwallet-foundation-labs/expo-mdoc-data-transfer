@@ -1,5 +1,5 @@
 {
-	"name": "@animo-id/expo-mdoc-data-transfer",
+	"name": "expo-mdoc-data-transfer",
 	"version": "0.0.0",
 	"description": "Expo mdoc data transfer module",
 	"main": "build/index.js",
@@ -15,16 +15,16 @@
 	"keywords": [
 		"react-native",
 		"expo",
-		"@animo-id/expo-mdoc-data-transfer",
+		"expo-mdoc-data-transfer",
 		"MdocDataTransfer"
 	],
-	"repository": "https://github.com/animo/expo-mdoc-data-transfer",
+	"repository": "https://github.com/openwallet-foundation-labs/expo-mdoc-data-transfer",
 	"bugs": {
-		"url": "https://github.com/animo/expo-mdoc-data-transfer/issues"
+		"url": "https://github.com/openwallet-foundation-labs/expo-mdoc-data-transfer/issues"
 	},
 	"author": "Animo Solutions <development@animo.id> (https://github.com/animo)",
 	"license": "Apache-2.0",
-	"homepage": "https://github.com/animo/expo-mdoc-data-transfer#readme",
+	"homepage": "https://github.com/openwallet-foundation-labs/expo-mdoc-data-transfer#readme",
 	"devDependencies": {
 		"@expo/config-types": "^54.0.8",
 		"@types/node": "^24.10.0",

@@ -13,4 +13,4 @@ export type Props = {
 const withMdocDataTransfer: ConfigPlugin<Props> = (config, props) =>
   withPlugins(config, [withAndroid, [withIos, props]])
 
-export default createRunOncePlugin(withMdocDataTransfer, '@animo-id/mdoc-data-transfer')
+export default createRunOncePlugin(withMdocDataTransfer, 'mdoc-data-transfer')

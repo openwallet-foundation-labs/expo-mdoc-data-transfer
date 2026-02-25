@@ -1,4 +1,4 @@
-package id.animo.mdoc.datatransfer
+package foundation.openwallet.mdoc.datatransfer
 
 import android.app.Activity
 import android.content.Context
