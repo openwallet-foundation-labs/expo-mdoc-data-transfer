@@ -90,11 +90,8 @@ jobs:
       - name: Publish
         id: publish
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-
           if [ ${{ inputs.release-type }} == 'alpha' ]; then
             pnpm --filter "expo-mdoc-data-transfer" release --preRelease=alpha
           else
