@@ -1,6 +1,6 @@
 {
 	"name": "expo-mdoc-data-transfer",
-	"version": "0.0.0",
+	"version": "0.2.0-alpha.5",
 	"description": "Expo mdoc data transfer module",
 	"main": "build/index.js",
 	"types": "build/index.d.ts",
