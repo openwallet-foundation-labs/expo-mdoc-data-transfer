@@ -4,6 +4,8 @@
 		"modules": ["MdocDataTransferModule"]
 	},
 	"android": {
-		"modules": ["id.animo.mdoc.datatransfer.MdocDataTransferModule"]
+		"modules": [
+			"foundation.openwallet.mdoc.datatransfer.MdocDataTransferModule"
+		]
 	}
 }

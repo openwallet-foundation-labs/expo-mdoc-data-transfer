@@ -32,11 +32,11 @@
 			"typedRoutes": true
 		},
 		"android": {
-			"package": "id.animo.mdoc.datatransfer.example",
+			"package": "foundation.openwallet.mdoc.datatransfer.example",
 			"permissions": ["android.permission.BLUETOOTH_CONNECT"]
 		},
 		"ios": {
-			"bundleIdentifier": "id.animo.mdoc.datatransfer.example",
+			"bundleIdentifier": "foundation.openwallet.mdoc.datatransfer.example",
 			"appleTeamId": "G9667JTP83"
 		},
 		"splash": {

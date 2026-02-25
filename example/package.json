@@ -10,7 +10,7 @@
 		"prebuild": "expo prebuild --no-install"
 	},
 	"dependencies": {
-		"@animo-id/expo-mdoc-data-transfer": "workspace:",
+		"expo-mdoc-data-transfer": "workspace:",
 		"@babel/runtime": "^7.25.9",
 		"@react-native/babel-preset": "^0.76.6",
 		"expo": "catalog:",

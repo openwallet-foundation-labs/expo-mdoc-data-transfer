@@ -154,13 +154,17 @@ const withAndroidNfcProperties: ConfigPlugin = (expoConfig) =>
     }
 
     for (const app of androidManifest.application ?? []) {
-      if (app.service?.some((s) => s.$['android:name'] === 'id.animo.mdoc.datatransfer.NfcEngagementServiceImpl'))
+      if (
+        app.service?.some(
+          (s) => s.$['android:name'] === 'foundation.openwallet.mdoc.datatransfer.NfcEngagementServiceImpl'
+        )
+      )
         continue
       app.service ??= []
       app.service.push({
         $: {
           'android:exported': 'true',
-          'android:name': 'id.animo.mdoc.datatransfer.NfcEngagementServiceImpl',
+          'android:name': 'foundation.openwallet.mdoc.datatransfer.NfcEngagementServiceImpl',
           'android:permission': 'android.permission.BIND_NFC_SERVICE',
         },
         'intent-filter': [
