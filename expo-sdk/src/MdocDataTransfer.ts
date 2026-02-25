@@ -20,7 +20,7 @@ export const mdocDataTransfer = {
 class MdocDataTransfer {
   public isNfcEnabled = false
 
-  private static handleError(nativeCall: () => void) {
+  private static handleError(nativeCall: () => void | Promise<void>) {
     let error: string | undefined
     const subscription = NativeMdocDataTransfer.addListener(
       MdocDataTransferEvent.OnError,
@@ -68,8 +68,8 @@ class MdocDataTransfer {
       NativeMdocDataTransfer.addListener(MdocDataTransferEvent.OnResponseSent, resolve)
     )
 
-    MdocDataTransfer.handleError(() =>
-      NativeMdocDataTransfer.sendDeviceResponse(Buffer.from(deviceResponse).toString('base64'))
+    MdocDataTransfer.handleError(
+      async () => await NativeMdocDataTransfer.sendDeviceResponse(Buffer.from(deviceResponse).toString('base64'))
     )
 
     await p

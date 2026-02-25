@@ -10,7 +10,7 @@ export type MdocDataTransferEvents = {
 declare class MdocDataTransferModule extends NativeModule<MdocDataTransferEvents> {
   initialize: () => void
   startQrEngagement: () => Promise<string>
-  sendDeviceResponse: (devceResponse: string) => void
+  sendDeviceResponse: (devceResponse: string) => Promise<void>
   shutdown: () => void
   enableNfc: () => void
 }

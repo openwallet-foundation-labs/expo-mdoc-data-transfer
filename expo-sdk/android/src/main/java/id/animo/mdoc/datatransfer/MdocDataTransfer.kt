@@ -68,6 +68,7 @@ class MdocDataTransfer(
                     )
                 }
 
+                // Can be removed with a cleanup
                 is TransferEvent.IntentToSend -> TODO()
             }
         }

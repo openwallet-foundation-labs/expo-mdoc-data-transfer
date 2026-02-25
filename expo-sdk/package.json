@@ -1,6 +1,6 @@
 {
 	"name": "@animo-id/expo-mdoc-data-transfer",
-	"version": "0.2.0-alpha.3",
+	"version": "0.0.0",
 	"description": "Expo mdoc data transfer module",
 	"main": "build/index.js",
 	"types": "build/index.d.ts",
@@ -9,7 +9,7 @@
 	},
 	"scripts": {
 		"build": "EXPO_NONINTERACTIVE=1 expo-module build && EXPO_NONINTERACTIVE=1 expo-module build plugin",
-		"types:check": "EXPO_NONINTERACTIVE=1 expo-module typecheck && EXPO_NONINTERACTIVE=1 expo-module plugin typecheck",
+		"types:check": "EXPO_NONINTERACTIVE=1 expo-module typecheck && EXPO_NONINTERACTIVE=1 expo-module typecheck plugin",
 		"release": "release-it"
 	},
 	"keywords": [

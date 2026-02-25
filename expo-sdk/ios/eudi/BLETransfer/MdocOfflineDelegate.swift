@@ -1,6 +1,3 @@
-//
-//  MdocOfflineHandler.swift
-
 import Foundation
 import MdocDataModel18013
 import MdocSecurity18013
@@ -9,7 +6,7 @@ import MdocSecurity18013
 public protocol MdocOfflineDelegate: AnyObject {
 	func didChangeStatus(_ newStatus: TransferStatus)
 	func didFinishedWithError(_ error: Error)
-	func didReceiveRequest(_ deviceRequest: Data)
+    func didReceiveRequest(_ deviceRequest: Data, _ sessionTranscript: Data)
 }
 
 

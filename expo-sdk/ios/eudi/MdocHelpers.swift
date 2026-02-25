@@ -91,4 +91,22 @@ public class MdocHelpers {
 		}
 		return numBlocks
 	}
+    
+    public static func decodeDeviceRequestIntoSessionTranscript(_ deviceEngagement: DeviceEngagement, _ handOver: CBOR, _ sessionEstablishmentBytes: Data) async throws -> (Data, SessionEncryption) {
+            guard let seCbor = try CBOR.decode([UInt8](sessionEstablishmentBytes)) else { logger.error("Request Data is not Cbor"); throw Self.makeError(code: .requestDecodeError) }
+            let se = try SessionEstablishment(cbor: seCbor)
+            let sessionEncryption = SessionEncryption(se: se, de: deviceEngagement, handOver: handOver)
+            guard var sessionEncryption else { logger.error("Session Encryption not initialized"); throw Self.makeError(code: .sessionEncryptionNotInitialized) }
+            let requestData = try await sessionEncryption.decrypt(se.data)
+            let deviceRequest = try DeviceRequest(data: requestData)
+            return (Data(deviceRequest.encode(options: CBOROptions())), sessionEncryption)
+    }
+    
+    public static func encryptDeviceResponse(_ deviceResponseBytes: Data, _ sessionEncryption: SessionEncryption) async throws -> Data? {
+        var se = sessionEncryption
+        let cipherData = try await se.encrypt([UInt8](deviceResponseBytes))
+        guard let cipherData else { return nil }
+        let sd = SessionData(cipher_data: cipherData, status: 20)
+        return Data(sd.encode(options: CBOROptions()))
+    }
 }

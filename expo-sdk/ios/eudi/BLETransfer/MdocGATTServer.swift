@@ -31,9 +31,10 @@ public class MdocGattServer: @unchecked Sendable, ObservableObject {
 	var remoteCentral: CBCentral!
 	var stateCharacteristic: CBMutableCharacteristic!
 	var server2ClientCharacteristic: CBMutableCharacteristic!
-	public var deviceEngagement: DeviceEngagement?
-	public var qrCodePayload: String?
-	public weak var delegate: (any MdocOfflineDelegate)?
+	var deviceEngagement: DeviceEngagement?
+    var sessionEncryption: SessionEncryption?
+	var qrCodePayload: String?
+	public var delegate: any MdocOfflineDelegate
 	var continuationQrCodeReady: CheckedContinuation<Void, Error>?
 	public var advertising: Bool = false
 	public var error: Error? = nil {
@@ -49,16 +50,17 @@ public class MdocGattServer: @unchecked Sendable, ObservableObject {
 		}
 	}
 	public var unlockData: [String: Data]!
-	public var deviceResponseBytes: Data?
+    
 	var readBuffer = Data()
 	var sendBuffer = [Data]()
 	var numBlocks: Int = 0
 	var subscribeCount: Int = 0
 	var initSuccess:Bool = false
 
-	public init()  {
-		secureArea = SecureEnclaveSecureArea.create(storage: KeyChainSecureKeyStorage(serviceName: "TODO_SERVICE_NAME", accessGroup: nil))
+    public init(_ delegate: any MdocOfflineDelegate)  {
+		secureArea = SecureEnclaveSecureArea.create(storage: KeyChainSecureKeyStorage(serviceName: "MDOC_PROXIMITY_SERVICE", accessGroup: nil))
 		status = .initialized
+        self.delegate = delegate
 		initPeripheralManager()
 		initSuccess = true
 	}
@@ -243,20 +245,29 @@ public class MdocGattServer: @unchecked Sendable, ObservableObject {
 	}
 
 	func handleStatusChange(_ newValue: TransferStatus) async {
-		guard !isPreview && !isInErrorState else {
-			return
-		}
-		logger.log(level: .info, "Transfer status will change to \(newValue)")
-		delegate?.didChangeStatus(newValue)
-		if newValue == .requestReceived {
-			peripheralManager.stopAdvertising()
-			delegate?.didReceiveRequest(readBuffer)
-		}
-		else if newValue == .initialized {
-			initPeripheralManager()
-		} else if newValue == .disconnected && status != .disconnected {
-			stop()
-		}
+        do {
+            guard !isPreview && !isInErrorState else {
+                return
+            }
+            guard let deviceEngagement else {
+                return
+            }
+            logger.log(level: .info, "Transfer status will change to \(newValue)")
+            delegate.didChangeStatus(newValue)
+            if newValue == .requestReceived {
+                peripheralManager.stopAdvertising()
+                let (dr, se) = try await MdocHelpers.decodeDeviceRequestIntoSessionTranscript(deviceEngagement, BleTransferMode.QRHandover, readBuffer)
+                sessionEncryption = se
+                delegate.didReceiveRequest(dr, Data(se.sessionTranscriptBytes))
+            }
+            else if newValue == .initialized {
+                initPeripheralManager()
+            } else if newValue == .disconnected && status != .disconnected {
+                stop()
+            }
+        } catch {
+            logger.log(level: .error, "\(error.localizedDescription)")
+        }
 	}
 
 	var isPreview: Bool {
@@ -270,7 +281,7 @@ public class MdocGattServer: @unchecked Sendable, ObservableObject {
 			return
 		}
 		status = .error
-		delegate?.didFinishedWithError(newValue)
+		delegate.didFinishedWithError(newValue)
 		logger.log(level: .error, "Transfer error \(newValue) (\(newValue.localizedDescription)")
 	}
 
@@ -307,8 +318,11 @@ public class MdocGattServer: @unchecked Sendable, ObservableObject {
 		}
 	}
     
-    func sendDeviceResponse(deviceResponse: Data) {
-        self.prepareDataToSend(deviceResponse)
+    func sendDeviceResponse(deviceResponse: Data) async throws {
+        guard let sessionEncryption else { throw MdocHelpers.makeError(code: .unexpected_error, str: error?.localizedDescription ?? "session encryption not found") }
+        let encryptedDeviceResponse = try await MdocHelpers.encryptDeviceResponse(deviceResponse, sessionEncryption)
+        guard let encryptedDeviceResponse else { throw MdocHelpers.makeError(code: .unexpected_error, str: error?.localizedDescription ?? "Could not encrypt device response") }
+        self.prepareDataToSend(encryptedDeviceResponse)
         self.sendDataWithUpdates()
     }
 }
