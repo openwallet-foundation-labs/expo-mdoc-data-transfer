@@ -1,0 +1,10 @@
+packages:
+  - 'expo-sdk'
+  - 'example'
+
+catalog:
+  expo: ~54.0.33
+  expo-module-scripts: ~5.0.8
+  react-native: 0.81.5
+  react: 19.1.0
+  typescript: ~5.9.3

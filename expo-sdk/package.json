@@ -1,0 +1,47 @@
+{
+	"name": "@animo-id/expo-mdoc-data-transfer",
+	"version": "0.0.0",
+	"description": "Expo mdoc data transfer module",
+	"main": "build/index.js",
+	"types": "build/index.d.ts",
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"build": "EXPO_NONINTERACTIVE=1 expo-module build && EXPO_NONINTERACTIVE=1 expo-module build plugin",
+		"types:check": "EXPO_NONINTERACTIVE=1 expo-module typecheck && EXPO_NONINTERACTIVE=1 expo-module typecheck plugin",
+		"release": "release-it"
+	},
+	"keywords": [
+		"react-native",
+		"expo",
+		"@animo-id/expo-mdoc-data-transfer",
+		"MdocDataTransfer"
+	],
+	"repository": "https://github.com/animo/expo-mdoc-data-transfer",
+	"bugs": {
+		"url": "https://github.com/animo/expo-mdoc-data-transfer/issues"
+	},
+	"author": "Animo Solutions <development@animo.id> (https://github.com/animo)",
+	"license": "Apache-2.0",
+	"homepage": "https://github.com/animo/expo-mdoc-data-transfer#readme",
+	"devDependencies": {
+		"@expo/config-types": "^54.0.8",
+		"@types/node": "^24.10.0",
+		"@types/react": "~19.1.10",
+		"expo": "catalog:",
+		"expo-module-scripts": "catalog:",
+		"react": "catalog:",
+		"react-native": "catalog:",
+		"release-it": "^17.4.1",
+		"typescript": "catalog:"
+	},
+	"peerDependencies": {
+		"expo": ">= 51",
+		"react": "*",
+		"react-native": ">= 0.75"
+	},
+	"dependencies": {
+		"buffer": "^6.0.3"
+	}
+}

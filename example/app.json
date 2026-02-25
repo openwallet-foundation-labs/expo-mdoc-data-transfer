@@ -1,40 +1,46 @@
 {
-  "expo": {
-    "name": "mdoc-data-transfer-example",
-    "slug": "mdoc-data-transfer-example",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "scheme": "mdoc-data-transfer-example",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": false,
-    "plugins": [
-      ["../app.plugin.js", { "ios": { "buildStatic": ["RNReanimated"] } }],
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "minSdkVersion": 26,
-            "useLegacyPackaging": true,
-            "extraMavenRepos": ["https://s01.oss.sonatype.org/content/repositories/snapshots/"]
-          },
-          "ios": {
-            "useFrameworks": "dynamic",
-            "deploymentTarget": "15.1"
-          }
-        }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true
-    },
-    "android": {
-      "package": "id.animo.mdocdatatransfer.example"
-    },
-    "ios": {
-      "bundleIdentifier": "id.animo.mdocdatatransfer.example"
-    },
-    "splash": {
-      "backgroundColor": "#ffffff"
-    }
-  }
+	"expo": {
+		"name": "mdoc-data-transfer-example",
+		"slug": "mdoc-data-transfer-example",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"scheme": "mdoc-data-transfer-example",
+		"userInterfaceStyle": "automatic",
+		"plugins": [
+			[
+				"../expo-sdk/app.plugin.js",
+				{
+					"ios": {
+						"buildStatic": ["RNReanimated"]
+					}
+				}
+			],
+			[
+				"expo-build-properties",
+				{
+					"android": {
+						"minSdkVersion": 26
+					},
+					"ios": {
+						"useFrameworks": "dynamic",
+						"deploymentTarget": "16.0"
+					}
+				}
+			]
+		],
+		"experiments": {
+			"typedRoutes": true
+		},
+		"android": {
+			"package": "id.animo.mdoc.datatransfer.example",
+			"permissions": ["android.permission.BLUETOOTH_CONNECT"]
+		},
+		"ios": {
+			"bundleIdentifier": "id.animo.mdoc.datatransfer.example",
+			"appleTeamId": "G9667JTP83"
+		},
+		"splash": {
+			"backgroundColor": "#ffffff"
+		}
+	}
 }
