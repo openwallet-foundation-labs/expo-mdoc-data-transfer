@@ -1,0 +1,17 @@
+{
+	"github": {
+		"release": true
+	},
+	"npm": {
+		"skipChecks": true,
+		"ignoreVersion": true,
+		"tag": "latest"
+	},
+	"git": {
+		"push": false,
+		"commit": false,
+		"requireCommits": true,
+		"tagAnnotation": "${version}",
+		"requireBranch": "main"
+	}
+}
