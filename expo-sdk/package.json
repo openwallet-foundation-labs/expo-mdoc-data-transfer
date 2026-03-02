@@ -27,7 +27,7 @@
 	"homepage": "https://github.com/openwallet-foundation-labs/expo-mdoc-data-transfer#readme",
 	"devDependencies": {
 		"@expo/config-types": "^54.0.10",
-		"@types/node": "^24.10.13",
+		"@types/node": "^25.3.3",
 		"@types/react": "~19.1.17",
 		"expo": "catalog:",
 		"expo-module-scripts": "catalog:",
