@@ -28,7 +28,7 @@
 	"devDependencies": {
 		"@expo/config-types": "^54.0.10",
 		"@types/node": "^24.10.13",
-		"@types/react": "~19.1.17",
+		"@types/react": "~19.2.14",
 		"expo": "catalog:",
 		"expo-module-scripts": "catalog:",
 		"react": "catalog:",
