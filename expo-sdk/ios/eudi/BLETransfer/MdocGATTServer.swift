@@ -213,6 +213,11 @@ public class MdocGattServer: @unchecked Sendable, ObservableObject {
 		}
 	}
 
+	/// Stop the current session and reset it, so a new device engagement can be started.
+	///
+	/// The reset is skipped while the status is `responseSent`: the response has been delivered, but
+	/// the reader still writes its end command against that status, and `responseSent` already
+	/// allows a new engagement.
 	public func stop() {
 		guard !isPreview else {
 			return
@@ -224,14 +229,28 @@ public class MdocGattServer: @unchecked Sendable, ObservableObject {
 		advertising = false
 		subscribeCount = 0
 		if let pk = deviceEngagement?.privateKey {
+			// Detach the key before deleting it, so a device engagement created while the deletion is
+			// still in flight doesn't get its private key cleared.
+			deviceEngagement?.privateKey = nil
 			Task { @MainActor in
 				try? await pk.secureArea.deleteKeyBatch(id: pk.privateKeyId, startIndex: 0, batchSize: 1)
-				deviceEngagement?.privateKey = nil
 			}
 		}
-		if status == .error && initSuccess {
-			status = .initializing
+		guard status != .responseSent else {
+			return
 		}
+		// Without this the status stays on e.g. `requestReceived` when a session is aborted before the
+		// response was sent (the user declines, or can't satisfy the request), and every following
+		// `performDeviceEngagement` is rejected by its status guard. This also recovers from `error`,
+		// which previously moved to `initializing` and was rejected by that same guard.
+		sessionEncryption = nil
+		deviceEngagement = nil
+		remoteCentral = nil
+		readBuffer.removeAll()
+		sendBuffer.removeAll()
+		numBlocks = 0
+		error = nil
+		status = .initialized
 	}
 
 	fileprivate func initPeripheralManager() {
