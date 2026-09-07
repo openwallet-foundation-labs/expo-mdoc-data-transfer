@@ -23,7 +23,7 @@
 					},
 					"ios": {
 						"useFrameworks": "dynamic",
-						"deploymentTarget": "16.0"
+						"deploymentTarget": "16.4"
 					}
 				}
 			]
@@ -38,9 +38,6 @@
 		"ios": {
 			"bundleIdentifier": "foundation.openwallet.mdoc.datatransfer.example",
 			"appleTeamId": "G9667JTP83"
-		},
-		"splash": {
-			"backgroundColor": "#ffffff"
 		}
 	}
 }

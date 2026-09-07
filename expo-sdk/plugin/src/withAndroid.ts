@@ -112,13 +112,6 @@ function addConnectPermissionToManifest(androidManifest: AndroidManifest) {
   return androidManifest
 }
 
-const withAndroidExcludeBcProv: ConfigPlugin = (expoConfig) =>
-  withAppBuildGradle(expoConfig, (c) => {
-    if (c.modResults.contents.includes("all*.exclude module: 'bcprov-jdk15to18'")) return c
-    c.modResults.contents += `android { configurations { all*.exclude module: 'bcprov-jdk15to18' } }`
-    return c
-  })
-
 const withAndroidBouncyCastleResolution: ConfigPlugin = (expoConfig) =>
   withAppBuildGradle(expoConfig, (c) => {
     if (c.modResults.contents.includes('bcutil-jdk18on:1.81')) {
@@ -220,7 +213,6 @@ export const withAndroid: ConfigPlugin = (config) =>
     (c) => AndroidConfig.Permissions.withPermissions(c, ['android.permission.BLUETOOTH_CONNECT']),
     withBleAndroidManifest,
     withAndroidBouncyCastleResolution,
-    withAndroidExcludeBcProv,
     withAndroidNfcProperties,
     withAndroidFixMetaInfConflict,
   ])
