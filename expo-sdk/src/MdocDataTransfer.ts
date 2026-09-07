@@ -50,17 +50,32 @@ class MdocDataTransfer {
   }
 
   public async waitForDeviceRequest() {
-    return await new Promise<{ deviceRequest: Uint8Array; sessionTranscript: Uint8Array }>((resolve) =>
-      NativeMdocDataTransfer.addListener(
-        MdocDataTransferEvent.OnRequestReceived,
-        (payload: OnRequestReceivedEventPayload) => {
-          resolve({
-            deviceRequest: new Uint8Array(Buffer.from(payload.deviceRequest, 'base64')),
-            sessionTranscript: new Uint8Array(Buffer.from(payload.sessionTranscript, 'base64')),
-          })
-        }
+    return await new Promise<{ deviceRequest: Uint8Array; sessionTranscript: Uint8Array }>((resolve, reject) => {
+      const subscriptions: ReturnType<typeof NativeMdocDataTransfer.addListener>[] = []
+
+      // Both listeners are removed as soon as either fires: without this every call leaks a
+      // subscription, and an error while waiting would leave the caller awaiting forever.
+      const settle = (settleWith: () => void) => {
+        for (const subscription of subscriptions) subscription.remove()
+        settleWith()
+      }
+
+      subscriptions.push(
+        NativeMdocDataTransfer.addListener(
+          MdocDataTransferEvent.OnRequestReceived,
+          (payload: OnRequestReceivedEventPayload) =>
+            settle(() =>
+              resolve({
+                deviceRequest: new Uint8Array(Buffer.from(payload.deviceRequest, 'base64')),
+                sessionTranscript: new Uint8Array(Buffer.from(payload.sessionTranscript, 'base64')),
+              })
+            )
+        ),
+        NativeMdocDataTransfer.addListener(MdocDataTransferEvent.OnError, (payload: OnErrorPayload) =>
+          settle(() => reject(new MdocDataTransferError(payload.error)))
+        )
       )
-    )
+    })
   }
 
   public async sendDeviceResponse(deviceResponse: Uint8Array) {
