@@ -10,7 +10,8 @@ public class MdocDataTransferModule: Module {
       
     Events(
         MdocDataTransferEvent.ON_REQUEST_RECEIVED.description,
-        MdocDataTransferEvent.ON_RESPONSE_SENT.description
+        MdocDataTransferEvent.ON_RESPONSE_SENT.description,
+        MdocDataTransferEvent.ON_ERROR.description
     )
 
     Function("initialize") {
@@ -42,7 +43,8 @@ extension MdocDataTransferModule : MdocOfflineDelegate {
     }
     
     public func didFinishedWithError(_ error: any Error) {
-        // no-op
+        logger.error("\(error.localizedDescription)")
+        sendEvent(MdocDataTransferEvent.ON_ERROR.description, ["error": error.localizedDescription])
     }
     
     public func didReceiveRequest(_ deviceRequest: Data, _ sessionTranscript: Data) {

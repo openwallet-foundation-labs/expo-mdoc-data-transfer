@@ -16,7 +16,8 @@ class MdocDataTransferModule : Module() {
 
         Events(
             MdocDataTransferEvent.ON_REQUEST_RECEIVED,
-            MdocDataTransferEvent.ON_RESPONSE_SENT
+            MdocDataTransferEvent.ON_RESPONSE_SENT,
+            MdocDataTransferEvent.ON_ERROR
         )
 
         Function("initialize") {
@@ -35,13 +36,25 @@ class MdocDataTransferModule : Module() {
 
 
         AsyncFunction("startQrEngagement") { promise: Promise ->
-            mDocDataTransfer?.apply {
-                onQrEngagementReady = { qrCode ->
-                    promise.resolve(qrCode)
-                    onQrEngagementReady = null
-                }
-                startQrEngagement()
-            } ?: throw MdocDataTransferException.NotInitialized()
+            val transfer = mDocDataTransfer ?: throw MdocDataTransferException.NotInitialized()
+
+            // Whichever callback fires first settles the promise and clears both, so a later event
+            // cannot settle it a second time.
+            fun clearCallbacks() {
+                transfer.onQrEngagementReady = null
+                transfer.onEngagementError = null
+            }
+
+            transfer.onQrEngagementReady = { qrCode ->
+                clearCallbacks()
+                promise.resolve(qrCode)
+            }
+            transfer.onEngagementError = { error ->
+                clearCallbacks()
+                promise.reject(MdocDataTransferException.EngagementFailed(error))
+            }
+
+            transfer.startQrEngagement()
         }
 
         Function("sendDeviceResponse") { deviceResponse: String ->
