@@ -30,12 +30,12 @@
 	"devDependencies": {
 		"@expo/config-types": "^57.0.2",
 		"@types/node": "^24.13.3",
-		"@types/react": "~19.2.18",
+		"@types/react": "~19.3.0",
 		"expo": "catalog:",
 		"expo-module-scripts": "catalog:",
 		"react": "catalog:",
 		"react-native": "catalog:",
-		"release-it": "^21.0.2",
+		"release-it": "^21.1.0",
 		"typescript": "catalog:"
 	},
 	"peerDependencies": {
