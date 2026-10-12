@@ -7,6 +7,6 @@ nodeLinker: hoisted
 catalog:
   expo: ~57.0.20
   expo-module-scripts: ~56.0.3
-  react: 19.2.8
-  react-native: 0.86.3
+  react: 19.3.0
+  react-native: 0.87.1
   typescript: ~6.0.3
