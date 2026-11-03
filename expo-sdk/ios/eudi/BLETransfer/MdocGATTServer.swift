@@ -85,6 +85,13 @@ public class MdocGattServer: @unchecked Sendable, ObservableObject {
 			if peripheral.state == .poweredOn, server.qrCodePayload != nil {
 				server.continuationQrCodeReady?.resume()
 				server.continuationQrCodeReady = nil
+			} else if peripheral.state == .unauthorized {
+				// Happens when the user denies the Bluetooth permission prompt shown on first use.
+				server.continuationQrCodeReady?.resume(throwing: MdocHelpers.makeError(code: .bleNotAuthorized))
+				server.continuationQrCodeReady = nil
+			} else if peripheral.state == .unsupported {
+				server.continuationQrCodeReady?.resume(throwing: MdocHelpers.makeError(code: .bleNotSupported))
+				server.continuationQrCodeReady = nil
 			}
 		}
 
@@ -163,6 +170,9 @@ public class MdocGattServer: @unchecked Sendable, ObservableObject {
 		qrCodePayload = deviceEngagement!.getQrCodePayload()
 		guard peripheralManager.state != .unauthorized else {
 			throw MdocHelpers.makeError(code: .bleNotAuthorized)
+		}
+		guard peripheralManager.state != .unsupported else {
+			throw MdocHelpers.makeError(code: .bleNotSupported)
 		}
 		if !isBlePoweredOn {
 			try await withCheckedThrowingContinuation { c in

@@ -3,10 +3,21 @@ import MdocDataModel18013
 import SwiftCBOR
 
 public class MdocDataTransferModule: Module {
+  // Created on first use instead of in `definition()`, which runs at app launch: creating the server
+  // creates its `CBPeripheralManager`, and that makes iOS show the Bluetooth permission prompt.
+  private var bleServerTransfer: MdocGattServer?
+
+  private func getOrCreateBleServerTransfer() -> MdocGattServer {
+    if let bleServerTransfer {
+      return bleServerTransfer
+    }
+    let server = MdocGattServer(self)
+    bleServerTransfer = server
+    return server
+  }
+
   public func definition() -> ModuleDefinition {
     Name("MdocDataTransfer")
-      
-    let bleServerTransfer: MdocGattServer = MdocGattServer(self)
       
     Events(
         MdocDataTransferEvent.ON_REQUEST_RECEIVED.description,
@@ -15,20 +26,23 @@ public class MdocDataTransferModule: Module {
     )
 
     Function("initialize") {
-        // no-op
+        _ = self.getOrCreateBleServerTransfer()
     }
       
       AsyncFunction("startQrEngagement") {
-          try await bleServerTransfer.performDeviceEngagement()
+          try await self.getOrCreateBleServerTransfer().performDeviceEngagement()
       }
       
       AsyncFunction("sendDeviceResponse") { (deviceResponse: String) in
+        guard let bleServerTransfer = self.bleServerTransfer else {
+            throw MdocDataTransferError.BleGattServerNotInitialized
+        }
         try await bleServerTransfer.sendDeviceResponse(deviceResponse: Data(base64Encoded: deviceResponse.data(using: .utf8)!)!)
         sendEvent(MdocDataTransferEvent.ON_RESPONSE_SENT.description)
     }
       
     Function("shutdown") {
-        bleServerTransfer.stop()
+        self.bleServerTransfer?.stop()
     }
       
     Function("enableNfc") {
